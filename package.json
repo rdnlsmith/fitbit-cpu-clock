@@ -1,18 +1,31 @@
 {
+  "name": "fitbit-cpu-clock",
+  "version": "0.1.0",
+  "license": "MIT",
+  "devDependencies": {
+    "@fitbit/sdk": "~3.1.0",
+    "@fitbit/sdk-cli": "^1.6.0"
+  },
   "fitbit": {
+    "appUUID": "c9236219-6f1d-4c88-84d4-6383bf48a880",
     "appType": "clockface",
     "appDisplayName": "CPU",
     "iconFile": "resources/icon.png",
     "wipeColor": "#8bc34a",
     "requestedPermissions": [],
     "buildTargets": [
-      "higgs",
-      "meson"
+      "meson",
+      "gemini"
     ],
     "i18n": {
       "en": {
         "name": "CPU"
       }
-    }
+    },
+    "defaultLanguage": "en-US"
+  },
+  "scripts": {
+    "build": "fitbit-build",
+    "debug": "fitbit"
   }
 }

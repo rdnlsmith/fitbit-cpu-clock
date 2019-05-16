@@ -1,14 +1,9 @@
-# LCD Clock Face
+# CPU
 
-Fitbit SDK example application which looks like a retro LCD digital clock.
+Digital clock face for Fitbit Versa, inspired by retro computer ads.
 
-![Screenshot](screenshot.png)
+Currently in early development.
 
-Uses images instead of fonts, and colors are configurable.
+# Acknowledgements
 
-Find out more information on the
-[Fitbit Developer Website](https://dev.fitbit.com).
-
-## License
-
-This example is licensed under the [MIT License](./LICENSE).
+This project was started from the [Fitbit/sdk-lcd-clock](https://github.com/Fitbit/sdk-lcd-clock) example, as of [commit 8f19795](https://github.com/Fitbit/sdk-lcd-clock/commit/8f19795141c284c79df3fa03841c2d6480520b53).

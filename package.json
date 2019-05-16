@@ -1,7 +1,7 @@
 {
   "fitbit": {
     "appType": "clockface",
-    "appDisplayName": "LCD Clock",
+    "appDisplayName": "CPU",
     "iconFile": "resources/icon.png",
     "wipeColor": "#8bc34a",
     "requestedPermissions": [],
@@ -11,7 +11,7 @@
     ],
     "i18n": {
       "en": {
-        "name": "LCD Clock"
+        "name": "CPU"
       }
     }
   }

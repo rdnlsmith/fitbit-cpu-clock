@@ -151,59 +151,58 @@ function setDay(val) {
 }
 
 function setHeartRate(val) {
-  drawDigit(val % 10, hr3);
-  val = Math.floor(val / 10);
+  let digits = [hr1, hr2, hr3];
+  let lastNonZeroIndex = 3;
 
-  drawDigit(val % 10, hr2);
-  val = Math.floor(val / 10);
+  for (let i = 2; i >= 0; i--) {
+    let digit = val % 10;
+    val = Math.floor(val / 10);
 
-  drawDigit(val % 10, hr1);
+    if (digit != 0) {
+      lastNonZeroIndex = i;
+    }
+
+    drawDigit(digit, digits[i]);
+    digits[i].style.opacity = 1;
+  }
+
+  // Darken leading zeroes
+  for (let i = 0; i < lastNonZeroIndex; i++)
+  {
+    digits[i].style.opacity = 0.2;
+  }
 }
 
 function setActivity(activity, val) {
+  // Can't rely on $+ syntax because text is right-aligned.
+  // Move container closer to edge for each 1; all other digits are the same width.
   let position = 140;
   actIcon.image = `icons/stat_${activity}_solid_24px.png`;
 
-  let digit = val % 10;
-  if (digit == 1) {
-    position += 7; // adjust for narrower 1
-  }
-  val = Math.floor(val / 10);
-  drawDigit(digit, act6);
+  let digits = [act1, act2, act3, act4, act5, act6];
+  let lastNonZeroIndex = 6;
 
-  digit = val % 10;
-  if (digit == 1) {
-    position += 7; // adjust for narrower 1
-  }
-  val = Math.floor(val / 10);
-  drawDigit(digit, act5);
+  for (let i = 5; i >= 0; i--) {
+    let digit = val % 10;
+    val = Math.floor(val / 10);
 
-  digit = val % 10;
-  if (digit == 1) {
-    position += 7; // adjust for narrower 1
-  }
-  val = Math.floor(val / 10);
-  drawDigit(digit, act4);
+    if (digit != 0) {
+      lastNonZeroIndex = i;
+    }
 
-  digit = val % 10;
-  if (digit == 1) {
-    position += 7; // adjust for narrower 1
-  }
-  val = Math.floor(val / 10);
-  drawDigit(digit, act3);
+    if (digit == 1) {
+      position += 7;
+    }
 
-  digit = val % 10;
-  if (digit == 1) {
-    position += 7; // adjust for narrower 1
+    drawDigit(digit, digits[i]);
+    digits[i].style.opacity = 1;
   }
-  val = Math.floor(val / 10);
-  drawDigit(digit, act2);
 
-  digit = val % 10;
-  if (digit == 1) {
-    position += 7; // adjust for narrower 1
+  // Darken leading zeroes
+  for (let i = 0; i < lastNonZeroIndex; i++)
+  {
+    digits[i].style.opacity = 0.2;
   }
-  drawDigit(digit, act1);
 
   actContainer.x = position;
 }

@@ -1,7 +1,9 @@
 <svg class="background">
-  <image id="day" href="quantifier/mon.png" x="60" y="50" width="110" height="35" fill="#FFFFFF" class="foreground" />
-  <image id="date1" href="quantifier/3.png" x="180" y="50" width="30" height="35" fill="#FFFFFF" class="foreground" />
-  <image id="date2" href="quantifier/0.png" x="210" y="50" width="30" height="35" fill="#FFFFFF" class="foreground" />
+  <svg x="6" y="64">
+    <image id="day" href="quantifier/mon.png" x="$+3" width="69" height="21" fill="#FFFFFF" class="foreground" />
+    <image id="date1" href="quantifier/3.png" x="$+15" width="19" height="21" fill="#FFFFFF" class="foreground" />
+    <image id="date2" href="quantifier/0.png" x="$+3" width="19" height="21" fill="#FFFFFF" class="foreground" />
+  </svg>
   <svg> 
     <image id="separator" href="numerals/separator.png" x="143" y="110" width="13" height="104" fill="#FFFFFF" class="foreground" />
     <image id="hours1" href="numerals/8.png" x="6" y="100" width="60" height="122" fill="#FFFFFF" class="foreground" />

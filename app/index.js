@@ -7,6 +7,7 @@ import { preferences } from "user-settings";
 import * as util from "./utils";
 import { HeartRateSensor } from "heart-rate";
 import { display } from "display";
+import { today } from "user-activity";
 
 // const SETTINGS_TYPE = "cbor";
 // const SETTINGS_FILE = "settings.cbor";
@@ -29,6 +30,15 @@ let date2 = document.getElementById("date2");
 let hr1 = document.getElementById("hr1");
 let hr2 = document.getElementById("hr2");
 let hr3 = document.getElementById("hr3");
+
+// Activity
+let actIcon = document.getElementById("act-icon");
+let act1 = document.getElementById("act1");
+let act2 = document.getElementById("act2");
+let act3 = document.getElementById("act3");
+let act4 = document.getElementById("act4");
+let act5 = document.getElementById("act5");
+let act6 = document.getElementById("act6");
 
 clock.granularity = "seconds";
 
@@ -55,6 +65,25 @@ clock.ontick = evt => {
   // MINUTES
   let minute = ("0" + d.getMinutes()).slice(-2);
   setMins(minute);
+
+  if (me.permissions.granted("access_activity")) {
+    actIcon.style.visibility = "visible";
+    act1.style.visibility = "visible";
+    act2.style.visibility = "visible";
+    act3.style.visibility = "visible";
+    act4.style.visibility = "visible";
+    act5.style.visibility = "visible";
+    act6.style.visibility = "visible";
+    setActivity("steps", today.adjusted.steps);
+  } else {
+    actIcon.style.visibility = "hidden";
+    act1.style.visibility = "hidden";
+    act2.style.visibility = "hidden";
+    act3.style.visibility = "hidden";
+    act4.style.visibility = "hidden";
+    act5.style.visibility = "hidden";
+    act6.style.visibility = "hidden";
+  }
 }
 
 if (HeartRateSensor && me.permissions.granted("access_heart_rate")) {
@@ -88,21 +117,21 @@ function applyTheme(background, foreground) {
 
 function setHours(val) {
   if (val > 9) {
-    drawDigit(Math.floor(val / 10), hours1);
+    drawNumeral(Math.floor(val / 10), hours1);
   } else {
-    drawDigit("", hours1);
+    drawNumeral("", hours1);
   }
-  drawDigit(Math.floor(val % 10), hours2);
+  drawNumeral(Math.floor(val % 10), hours2);
 }
 
 function setMins(val) {
-  drawDigit(Math.floor(val / 10), mins1);
-  drawDigit(Math.floor(val % 10), mins2);
+  drawNumeral(Math.floor(val / 10), mins1);
+  drawNumeral(Math.floor(val % 10), mins2);
 }
 
 function setDate(val) {
-  drawDateDigit(Math.floor(val / 10), date1);
-  drawDateDigit(Math.floor(val % 10), date2);
+  drawDigit(Math.floor(val / 10), date1);
+  drawDigit(Math.floor(val % 10), date2);
 }
 
 function setDay(val) {
@@ -110,20 +139,41 @@ function setDay(val) {
 }
 
 function setHeartRate(val) {
-  drawDateDigit(val % 10, hr3);
+  drawDigit(val % 10, hr3);
   val = Math.floor(val / 10);
 
-  drawDateDigit(val % 10, hr2);
+  drawDigit(val % 10, hr2);
   val = Math.floor(val / 10);
 
-  drawDateDigit(val % 10, hr1);
+  drawDigit(val % 10, hr1);
 }
 
-function drawDigit(val, place) {
+function setActivity(activity, val) {
+  actIcon.image = `icons/stat_${activity}_solid_24px.png`;
+
+  drawDigit(val % 10, act6);
+  val = Math.floor(val / 10);
+
+  drawDigit(val % 10, act5);
+  val = Math.floor(val / 10);
+
+  drawDigit(val % 10, act4);
+  val = Math.floor(val / 10);
+
+  drawDigit(val % 10, act3);
+  val = Math.floor(val / 10);
+
+  drawDigit(val % 10, act2);
+  val = Math.floor(val / 10);
+
+  drawDigit(val % 10, act1);
+}
+
+function drawNumeral(val, place) {
   place.image = `numerals/${val}.png`;
 }
 
-function drawDateDigit(val, place) {
+function drawDigit(val, place) {
   place.image = `quantifier/${val}.png`
 }
 

@@ -15,4 +15,13 @@
     <image id="hr2" href="quantifier/0.png" x="$+3" width="19" height="21" fill="#ffffff" class="foreground" />
     <image id="hr3" href="quantifier/0.png" x="$+3" width="19" height="21" fill="#ffffff" class="foreground" />
   </svg>
+  <svg x="140" y="237">
+    <image id="act-icon" href="icons/stat_steps_solid_24px.png" width="24" height="24" fill="#ffffff" class="foreground" />
+    <image id="act1" href="quantifier/1.png" x="$+3" width="19" height="21" fill="#ffffff" class="foreground" />
+    <image id="act2" href="quantifier/2.png" x="$+3" width="19" height="21" fill="#ffffff" class="foreground" />
+    <image id="act3" href="quantifier/3.png" x="$+3" width="19" height="21" fill="#ffffff" class="foreground" />
+    <image id="act4" href="quantifier/4.png" x="$+3" width="19" height="21" fill="#ffffff" class="foreground" />
+    <image id="act5" href="quantifier/5.png" x="$+3" width="19" height="21" fill="#ffffff" class="foreground" />
+    <image id="act6" href="quantifier/6.png" x="$+3" width="19" height="21" fill="#ffffff" class="foreground" />
+  </svg>
 </svg>

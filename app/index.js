@@ -32,6 +32,7 @@ let hr2 = document.getElementById("hr2");
 let hr3 = document.getElementById("hr3");
 
 // Activity
+let actContainer = document.getElementById("act-container");
 let actIcon = document.getElementById("act-icon");
 let act1 = document.getElementById("act1");
 let act2 = document.getElementById("act2");
@@ -135,7 +136,18 @@ function setDate(val) {
 }
 
 function setDay(val) {
-  day.image = getDayImg(val);
+  let days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+  let dayName = days[val];
+  day.image = `quantifier/${dayName}.png`;
+  if (dayName === "sun" || dayName === "tue" || dayName === "thu") {
+    day.width = 61;
+  } else if (dayName === "fri") {
+    day.width = 49;
+  } else if (dayName === "sat") {
+    day.width = 60;
+  } else {
+    day.width = 66;
+  }
 }
 
 function setHeartRate(val) {
@@ -149,24 +161,51 @@ function setHeartRate(val) {
 }
 
 function setActivity(activity, val) {
+  let position = 140;
   actIcon.image = `icons/stat_${activity}_solid_24px.png`;
 
-  drawDigit(val % 10, act6);
+  let digit = val % 10;
+  if (digit == 1) {
+    position += 7; // adjust for narrower 1
+  }
   val = Math.floor(val / 10);
+  drawDigit(digit, act6);
 
-  drawDigit(val % 10, act5);
+  digit = val % 10;
+  if (digit == 1) {
+    position += 7; // adjust for narrower 1
+  }
   val = Math.floor(val / 10);
+  drawDigit(digit, act5);
 
-  drawDigit(val % 10, act4);
+  digit = val % 10;
+  if (digit == 1) {
+    position += 7; // adjust for narrower 1
+  }
   val = Math.floor(val / 10);
+  drawDigit(digit, act4);
 
-  drawDigit(val % 10, act3);
+  digit = val % 10;
+  if (digit == 1) {
+    position += 7; // adjust for narrower 1
+  }
   val = Math.floor(val / 10);
+  drawDigit(digit, act3);
 
-  drawDigit(val % 10, act2);
+  digit = val % 10;
+  if (digit == 1) {
+    position += 7; // adjust for narrower 1
+  }
   val = Math.floor(val / 10);
+  drawDigit(digit, act2);
 
-  drawDigit(val % 10, act1);
+  digit = val % 10;
+  if (digit == 1) {
+    position += 7; // adjust for narrower 1
+  }
+  drawDigit(digit, act1);
+
+  actContainer.x = position;
 }
 
 function drawNumeral(val, place) {
@@ -175,6 +214,11 @@ function drawNumeral(val, place) {
 
 function drawDigit(val, place) {
   place.image = `quantifier/${val}.png`
+  if (val == 1) {
+    place.width = 11;
+  } else {
+    place.width = 18;
+  }
 }
 
 function getDayImg(index) {

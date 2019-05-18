@@ -12,7 +12,9 @@
     "appDisplayName": "CPU",
     "iconFile": "resources/icon.png",
     "wipeColor": "#8bc34a",
-    "requestedPermissions": [],
+    "requestedPermissions": [
+      "access_heart_rate"
+    ],
     "buildTargets": [
       "meson",
       "gemini"

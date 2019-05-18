@@ -5,6 +5,8 @@ import * as fs from "fs";
 import * as messaging from "messaging";
 import { preferences } from "user-settings";
 import * as util from "./utils";
+import { HeartRateSensor } from "heart-rate";
+import { display } from "display";
 
 // const SETTINGS_TYPE = "cbor";
 // const SETTINGS_FILE = "settings.cbor";
@@ -22,6 +24,11 @@ let mins2 = document.getElementById("mins2");
 let day = document.getElementById("day");
 let date1 = document.getElementById("date1");
 let date2 = document.getElementById("date2");
+
+// Heart Rate
+let hr1 = document.getElementById("hr1");
+let hr2 = document.getElementById("hr2");
+let hr3 = document.getElementById("hr3");
 
 clock.granularity = "seconds";
 
@@ -48,6 +55,21 @@ clock.ontick = evt => {
   // MINUTES
   let minute = ("0" + d.getMinutes()).slice(-2);
   setMins(minute);
+}
+
+if (HeartRateSensor && me.permissions.granted("access_heart_rate")) {
+  let hrm = new HeartRateSensor({ frequency: 1 });
+  hrm.addEventListener("reading", () => {
+    setHeartRate(hrm.heartRate);
+  });
+  display.addEventListener("change", () => {
+    display.on ? hrm.start() : hrm.stop();
+  });
+  hrm.start();
+} else {
+  hr1.style.visibility = "hidden";
+  hr2.style.visibility = "hidden";
+  hr3.style.visibility = "hidden";
 }
 
 // Apply theme colors to elements
@@ -87,17 +109,27 @@ function setDay(val) {
   day.image = getDayImg(val);
 }
 
+function setHeartRate(val) {
+  drawDateDigit(val % 10, hr3);
+  val = Math.floor(val / 10);
+
+  drawDateDigit(val % 10, hr2);
+  val = Math.floor(val / 10);
+
+  drawDateDigit(val % 10, hr1);
+}
+
 function drawDigit(val, place) {
   place.image = `numerals/${val}.png`;
 }
 
 function drawDateDigit(val, place) {
-  place.image = `dates/${val}.png`
+  place.image = `quantifier/${val}.png`
 }
 
 function getDayImg(index) {
   let days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-  return `dates/${days[index]}.png`;
+  return `quantifier/${days[index]}.png`;
 }
 
 // Listen for the onmessage event

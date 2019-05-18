@@ -1,12 +1,18 @@
 <svg class="background">
-  <image id="day" href="dates/mon.png" x="60" y="50" width="110" height="35" fill="#FFFFFF" class="foreground" />
-  <image id="date1" href="dates/3.png" x="180" y="50" width="30" height="35" fill="#FFFFFF" class="foreground" />
-  <image id="date2" href="dates/0.png" x="210" y="50" width="30" height="35" fill="#FFFFFF" class="foreground" />
+  <image id="day" href="quantifier/mon.png" x="60" y="50" width="110" height="35" fill="#FFFFFF" class="foreground" />
+  <image id="date1" href="quantifier/3.png" x="180" y="50" width="30" height="35" fill="#FFFFFF" class="foreground" />
+  <image id="date2" href="quantifier/0.png" x="210" y="50" width="30" height="35" fill="#FFFFFF" class="foreground" />
   <svg> 
     <image id="separator" href="numerals/separator.png" x="143" y="110" width="13" height="104" fill="#FFFFFF" class="foreground" />
     <image id="hours1" href="numerals/8.png" x="6" y="100" width="60" height="122" fill="#FFFFFF" class="foreground" />
     <image id="hours2" href="numerals/8.png" x="75" y="100" width="60" height="122" fill="#FFFFFF" class="foreground" />
     <image id="mins1" href="numerals/8.png" x="167" y="100" width="60" height="122" fill="#FFFFFF" class="foreground" />
     <image id="mins2" href="numerals/8.png" x="234" y="100" width="60" height="122" fill="#FFFFFF" class="foreground" />
+  </svg>
+  <svg x="6" y="237">
+    <image id="hr-icon" href="icons/stat_hr_solid_24px.png" width="24" height="24" fill="#ffffff" class="foreground" />
+    <image id="hr1" href="quantifier/0.png" x="$+3" width="19" height="21" fill="#ffffff" class="foreground" />
+    <image id="hr2" href="quantifier/0.png" x="$+3" width="19" height="21" fill="#ffffff" class="foreground" />
+    <image id="hr3" href="quantifier/0.png" x="$+3" width="19" height="21" fill="#ffffff" class="foreground" />
   </svg>
 </svg>

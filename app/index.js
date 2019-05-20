@@ -104,10 +104,14 @@ function applyTheme(background, foreground) {
 }
 
 function setHours(val) {
+  hours1.style.opacity = 1;
   if (val > 9) {
     drawNumeral(Math.floor(val / 10), hours1);
   } else {
-    drawNumeral("", hours1);
+    drawNumeral(0, hours1);
+    if (preferences.clockDisplay === "12h") {
+      hours1.style.opacity = 0.2;
+    }
   }
   drawNumeral(Math.floor(val % 10), hours2);
 }

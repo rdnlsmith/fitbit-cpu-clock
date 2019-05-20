@@ -122,8 +122,15 @@ function setMins(val) {
 }
 
 function setDate(val) {
-  util.drawDigit(Math.floor(val / 10), date1);
+  let tens = Math.floor(val / 10);
+  util.drawDigit(tens, date1);
   util.drawDigit(Math.floor(val % 10), date2);
+
+  if (tens == 0) {
+    date1.style.opacity = 0.2;
+  } else {
+    date1.style.opacity = 1;
+  }
 }
 
 function setDay(val) {

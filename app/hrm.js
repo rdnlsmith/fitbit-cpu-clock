@@ -2,11 +2,14 @@ import document from "document";
 import { HeartRateSensor } from "heart-rate";
 import { display } from "display";
 import { me } from "appbit";
+import * as util from "./utils";
 
 
 var hrImage = document.getElementById("hrImage");
 var hrIcon = document.getElementById("hrIcon");
-var hrText = document.getElementById("hrText");
+let hr1 = document.getElementById("hr1");
+let hr2 = document.getElementById("hr2");
+let hr3 = document.getElementById("hr3");
 
 var hrm = null;
 var lastMeasuredHR = 0;
@@ -27,7 +30,7 @@ function getHRMReading() {
         //show as not active
         hrmActive = false;
         setHRIconColor();
-        showHRMValue("--");
+        showHRMValue("---");
       }
     }
     else {
@@ -68,12 +71,38 @@ function setHRIconColor() {
   }
   else {
     hrImage.animate("disable");
-    hrIcon.style.fill = "#CCCCCC";
+    hrIcon.style.fill = "#ffffff";
   }
 }
 
 function showHRMValue(newHRMValue) {
-  hrText.text = newHRMValue;
+  let digits = [hr1, hr2, hr3];
+  let lastNonZeroIndex = 3;
+
+  for (let i = 2; i >= 0; i--) {
+    var digit;
+    if (newHRMValue === "---")
+    {
+      digit = "-";
+    }
+    else {
+      digit = newHRMValue % 10;
+      newHRMValue = Math.floor(newHRMValue / 10);
+    }
+
+    if (digit != 0) {
+      lastNonZeroIndex = i;
+    }
+
+    util.drawDigit(digit, digits[i]);
+    digits[i].style.opacity = 1;
+  }
+
+  // Darken leading zeroes
+  for (let i = 0; i < lastNonZeroIndex; i++)
+  {
+    digits[i].style.opacity = 0.2;
+  }
 }
 
 function startHRMeasurements() {
@@ -97,7 +126,7 @@ function stopHRMeasurements() {
 }
 
 export function initialize() {
-  hrText.text = '--';
+  showHRMValue('---');
   if (me.permissions.granted("access_heart_rate")) {
     hrm = new HeartRateSensor();
     if (display.on) {

@@ -5,3 +5,12 @@ export function zeroPad(i) {
   }
   return i;
 }
+
+export function drawDigit(val, place) {
+  place.image = `quantifier/${val}.png`
+  if (val == 1) {
+    place.width = 11;
+  } else {
+    place.width = 18;
+  }
+}

@@ -5,7 +5,7 @@ import * as fs from "fs";
 import * as messaging from "messaging";
 import { preferences } from "user-settings";
 import * as util from "./utils";
-import { HeartRateSensor } from "heart-rate";
+import * as hrm from "./hrm";
 import { display } from "display";
 import { today } from "user-activity";
 
@@ -87,20 +87,7 @@ clock.ontick = evt => {
   }
 }
 
-if (HeartRateSensor && me.permissions.granted("access_heart_rate")) {
-  let hrm = new HeartRateSensor({ frequency: 1 });
-  hrm.addEventListener("reading", () => {
-    setHeartRate(hrm.heartRate);
-  });
-  display.addEventListener("change", () => {
-    display.on ? hrm.start() : hrm.stop();
-  });
-  hrm.start();
-} else {
-  hr1.style.visibility = "hidden";
-  hr2.style.visibility = "hidden";
-  hr3.style.visibility = "hidden";
-}
+hrm.initialize();
 
 // Apply theme colors to elements
 function applyTheme(background, foreground) {
@@ -131,8 +118,8 @@ function setMins(val) {
 }
 
 function setDate(val) {
-  drawDigit(Math.floor(val / 10), date1);
-  drawDigit(Math.floor(val % 10), date2);
+  util.drawDigit(Math.floor(val / 10), date1);
+  util.drawDigit(Math.floor(val % 10), date2);
 }
 
 function setDay(val) {
@@ -147,29 +134,6 @@ function setDay(val) {
     day.width = 60;
   } else {
     day.width = 66;
-  }
-}
-
-function setHeartRate(val) {
-  let digits = [hr1, hr2, hr3];
-  let lastNonZeroIndex = 3;
-
-  for (let i = 2; i >= 0; i--) {
-    let digit = val % 10;
-    val = Math.floor(val / 10);
-
-    if (digit != 0) {
-      lastNonZeroIndex = i;
-    }
-
-    drawDigit(digit, digits[i]);
-    digits[i].style.opacity = 1;
-  }
-
-  // Darken leading zeroes
-  for (let i = 0; i < lastNonZeroIndex; i++)
-  {
-    digits[i].style.opacity = 0.2;
   }
 }
 
@@ -194,7 +158,7 @@ function setActivity(activity, val) {
       position += 7;
     }
 
-    drawDigit(digit, digits[i]);
+    util.drawDigit(digit, digits[i]);
     digits[i].style.opacity = 1;
   }
 
@@ -209,15 +173,6 @@ function setActivity(activity, val) {
 
 function drawNumeral(val, place) {
   place.image = `numerals/${val}.png`;
-}
-
-function drawDigit(val, place) {
-  place.image = `quantifier/${val}.png`
-  if (val == 1) {
-    place.width = 11;
-  } else {
-    place.width = 18;
-  }
 }
 
 function getDayImg(index) {

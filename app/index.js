@@ -109,9 +109,7 @@ function setHours(val) {
     drawNumeral(Math.floor(val / 10), hours1);
   } else {
     drawNumeral(0, hours1);
-    if (preferences.clockDisplay === "12h") {
-      hours1.style.opacity = 0.2;
-    }
+    hours1.style.opacity = 0.2;
   }
   drawNumeral(Math.floor(val % 10), hours2);
 }
